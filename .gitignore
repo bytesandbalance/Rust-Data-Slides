@@ -1,0 +1,10 @@
+components
+node_modules
+package-lock.json
+README.md
+snippets
+netlify.toml
+package.json
+pages
+vercel.json
+*.npmrc
