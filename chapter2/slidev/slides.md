@@ -14,7 +14,7 @@ theme: dracula
 layout: default
 ---
 
-# The `async`/`.await` Syntax
+## The `async`/`.await` Syntax
 
 ```rust{1-3|5}
 async fn fetch_earthquake_data(...) -> Result<Vec<EarthquakeEvent>, Errors> {
@@ -31,7 +31,7 @@ let earthquake_events = fetch_earthquake_data(...).await?; // .await is key
 layout: default
 ---
 
-# Synchronous `fetch_earthquake_data`
+## Synchronous `fetch_earthquake_data`
 
 ````md magic-move
 ```rust
@@ -73,7 +73,7 @@ async fn fetch_earthquake_data(
 layout: default
 ---
 
-# Real-Time Fetching with `async`
+## Real-Time Fetching with `async`
 
 ````md magic-move
 ```rust
@@ -118,7 +118,7 @@ async fn fetch_earthquake_data_real_time(
 layout: default
 ---
 
-# Async Traits and Structs
+## Async Traits and Structs
 
 ````md magic-move
 ```rust
@@ -158,7 +158,7 @@ trait EarthquakeDataSource {
 layout: default
 ---
 
-# Running Our Async Code (Tokio)
+## Running Our Async Code (Tokio)
 
 ```rust
 #[tokio::main] // This attribute sets up the async runtime.
