@@ -4,7 +4,12 @@ background: black
 theme: dracula
 ---
 
+
 # Why Go Async?
+
+---
+layout: default
+---
 
 - **Responsiveness:**  Avoid blocking the entire application while waiting for tasks like network requests.
 - **Efficiency:**  Handle multiple I/O-bound operations concurrently.
