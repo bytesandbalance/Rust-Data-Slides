@@ -11,12 +11,17 @@ In this tutorial, we'll cover:
 * **Crates:** Using `reqwest` to handle network requests.
 
 ## Slide 3
+The `EarthquakeEvent` struct serves as our template for storing information about a single earthquake. It consists of various fields, each with a specific data type, to capture details like the earthquake's magnitude, location, time, and more. For instance:
 
-The `EarthquakeEvent` struct is our blueprint for representing a single earthquake:
 
-* **`Debug`:** Easily print earthquake details for troubleshooting.
-* **`Serialize`:** Convert earthquake data to JSON format (used by APIs).
-* **`Deserialize`:** Convert JSON data from APIs back into `EarthquakeEvent` objects.
+In addition to these fields, we've added some special attributes called "derives" to this struct:
+
+* **`Debug`:** This makes it easy for us to print out the contents of an `EarthquakeEvent` in a human-readable format, which is super helpful when we're troubleshooting or debugging our code.
+
+* **`Serialize`:** This enables us to transform an `EarthquakeEvent` object into JSON format. This is essential because most APIs send and receive data in JSON, so we need a way to convert our struct into this format before sending it over the network.
+
+* **`Deserialize`:**  This does the opposite of `Serialize`. It allows us to take raw JSON data from an API and convert it back into a neatly structured `EarthquakeEvent` object that we can work with in our Rust code.
+
 
 ## Slide 4
 
