@@ -8,3 +8,4 @@ package.json
 pages
 vercel.json
 *.npmrc
+*.mp4

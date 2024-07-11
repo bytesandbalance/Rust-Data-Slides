@@ -4,21 +4,23 @@ background: black
 theme: dracula
 ---
 
-# Fetching Earthquake Data with Rust
+# Fetching Earthquake Data with Rust <span class="fragment fade-in-then-out"></span>
+
 
 ---
 layout: default
 ---
 
-# Introduction
 
-Rust makes it easy to fetch and work with data from external APIs. In this tutorial, we'll build a simple tool to get earthquake data from the USGS (United States Geological Survey) API. We'll use:
+Rust makes it easy to fetch and work with data from external APIs. In this tutorial, we'll build a simple tool to get earthquake data from the USGS (United States Geological Survey) API.
 
-- **Traits** to define a flexible interface for fetching data from different sources.
-- **Structs** to model the earthquake data and our data source.
-- **The `reqwest` library** to handle the network requests.
+We'll use:
 
-By the end, you'll have a solid foundation for building your own data-fetching applications in Rust.
+- **Traits** <span class="fragment highlight-red"></span> to define a flexible interface for fetching data from different sources.
+- **Structs** <span class="fragment highlight-green"></span> to model the earthquake data and our data source.
+- **The `reqwest` library** <span class="fragment slide-up"></span> to handle the network requests.
+
+<div v-click> By the end, you'll have a solid foundation for building your own data-fetching applications in Rust. </div>
 
 
 ---
@@ -133,7 +135,7 @@ layout: default
 # Implementing `fetch_earthquake_data` for `UsgsDataSource`
 
 ````md magic-move
-```rust
+```rust{all|8}
 impl EarthquakeDataSource for UsgsDataSource {
     type Error = Errors;
 
@@ -489,7 +491,7 @@ pub fn run_fetch(
 layout: default
 ---
 
-# The `?` Operator**
+# The `?` Operator
 
 The question mark `?` is a powerful tool for handling `Result` values concisely. Here's what it does:
 
@@ -520,4 +522,6 @@ layout: default
 layout: center
 ---
 
-# Code Demo
+<video controls width="600">
+  <source src="/home/pegah/output.mp4" type="video/mp4">
+</video>

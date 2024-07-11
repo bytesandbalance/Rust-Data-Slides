@@ -17,10 +17,6 @@ layout: default
 - **`linfa`:**  A comprehensive machine learning library in Rust. We'll use it for k-means clustering.
 
 
----
-layout: default
----
-
 ## Preparing Data (`ndarray`)
 
 ```rust
