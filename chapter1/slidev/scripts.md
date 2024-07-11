@@ -6,8 +6,8 @@ Kia Ora, everyone! Pegah here. Welcome to the first tutorial in our series. We'l
 
 In this tutorial, we'll cover:
 
-* **Structs:**  Modeling our earthquake data.
 * **Traits:** Defining standardized interfaces for data sources.
+* **Structs:**  Modeling our earthquake data.
 * **Crates:** Using `reqwest` to handle network requests.
 
 ## Slide 3
@@ -45,7 +45,7 @@ This struct is our specialist for working with the USGS API. Its job is to take 
 3. **Parse the Response:** The USGS sends back the data in JSON format.  The `UsgsDataSource` unpacks this JSON into a tidy list of `EarthquakeEvent` objects that we can use.
 4. **Handle Errors:** If anything goes wrong (like a network issue or incorrect parameters), it'll catch the error and let us know.
 
-The implementation details for these steps are in the `impl` block associated with the `UsgsDataSource` struct. We'll dive deeper into that in the next slide.
+The implementation details for these steps are in the `impl` block associated with the `UsgsDataSource` struct.
 
 ## Slide 6
 
