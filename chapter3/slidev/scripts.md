@@ -99,7 +99,7 @@ The function returns a tuple containing the calculated depth and magnitude stati
 # Slide 9
 `calculate_all_cluster_statistics_async` takes a vector of `EarthquakeCluster` objects as input and returns a vector of `ClusterStatistics` objects containing the calculated statistics for each cluster.  Here's how it works:
 
-1. **Create Tasks:**
+1. Create Tasks:
     - It iterates through the `clusters` vector and creates asynchronous tasks for each cluster.
     - The `clone` method is used to create copies of the `centroid` and `cluster` data for each task. This is necessary because Rust's ownership rules wouldn't allow us to move the original data into multiple asynchronous tasks.
     - `async move`:
@@ -108,18 +108,31 @@ The function returns a tuple containing the calculated depth and magnitude stati
     - Inside each task, we calculate the `duration_task` and the `depth_stats` and `magnitude_stats` using the `calculate_cluster_statistics_async` function, which we saw in a previous slide.  The `.await` operator is used to wait for the results of these asynchronous calculations.
     - Each task produces a `ClusterStatistics` struct containing the calculated statistics for that cluster.
 
-2. **Join All Tasks:**
+2. Join All Tasks:
    - The `futures::future::try_join_all` function is used to wait for all the asynchronous tasks to complete. This function collects the results of all the tasks into a single `Result` value.
 
-3. **Handle Results:**
+3. Handle Results:
     - If all tasks complete successfully, the `Ok` variant of the result contains a vector of `ClusterStatistics` objects, representing the calculated statistics for all clusters.
     - If any task fails, the `Err` variant will contain the first error encountered.
 
-**Important Note:**
+Important Note:
 
-* **`dyn Error`:** This indicates that the error type can be any type that implements the `Error` trait. This is known as a "trait object" and allows for flexibility in error handling. We're using `Box<dyn Error>` to store the error on the heap, ensuring that the function's return type has a fixed size regardless of the specific error type. This makes it easier to work with errors that might originate from different parts of our code. The choice between Box<dyn Error> and a concrete error type comes down to flexibility vs. specificity. If you need the flexibility to handle multiple error types, or if you want to work with errors generically, Box<dyn Error> is your friend. If you know exactly what kind of error you'll encounter and performance is a top priority, using a specific error type is the way to go.
+* `dyn Error`: This indicates that the error type can be any type that implements the `Error` trait. This is known as a "trait object" and allows for flexibility in error handling. We're using `Box<dyn Error>` to store the error on the heap, ensuring that the function's return type has a fixed size regardless of the specific error type. This makes it easier to work with errors that might originate from different parts of our code. The choice between Box<dyn Error> and a concrete error type comes down to flexibility vs. specificity. If you need the flexibility to handle multiple error types, or if you want to work with errors generically, Box<dyn Error> is your friend. If you know exactly what kind of error you'll encounter and performance is a top priority, using a specific error type is the way to go.
 
 Trait Object Ergonomics:
 
 Rust's trait objects (like dyn Error) are designed to be used with Box, Rc (reference-counted pointer), or Arc (atomic reference-counted pointer). This is because trait objects themselves don't have a known size at compile time.
 By using Box, we allocate the trait object on the heap, and the function only needs to return a pointer to that memory, which has a fixed size.
+
+
+## Temporal Analysis in Rust with Polars
+
+Code Explanation:
+
+- Mapping and Collecting: In `events_to_dataframe`, we map over the list of `EarthquakeEvent` to extract relevant fields (timestamps, magnitudes, etc.) into separate vectors. The collect step gathers these mapped values into vectors, which are then used to create series for the `DataFrame`. This structured approach ensures accurate data representation.
+
+- Cloning and Lazy Evaluation: In `temporal_analysis`, we clone the original `DataFrame` to avoid directly modifying the original data. We use lazy evaluation for efficient, deferred execution, allowing us to chain operations like datetime conversion, feature extraction, and grouping without immediate computation. This is especially beneficial for performance when handling large datasets.
+
+- Handling Parsing Errors: Both functions return a `Result<DataFrame, PolarsError>`. This error handling mechanism ensures that if something goes wrong—like an issue with the data conversion or grouping—a `PolarsError` is returned. This allows the calling code to handle the error gracefully rather than causing a runtime panic.
+
+- Returning the Aggregated Data: The `temporal_analysis` function returns a `DataFrame` that groups earthquake data by year and month. For each group, it counts the number of earthquake events. This resulting `DataFrame` is essential for understanding trends in earthquake occurrences over time.
