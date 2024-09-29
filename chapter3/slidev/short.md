@@ -1,3 +1,5 @@
+# Data Analysis
+
 We explore data analysis with Rust by implementing clustering, statistical analyses, and temporal analysis of earthquake data.
 We use the `ndarray` library for efficient numerical operations and the `linfa` library for k-means clustering.
 
